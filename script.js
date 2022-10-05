@@ -8,7 +8,7 @@ const getComputerChoice = function () {
 };
 
 const getPlayerChoice = function () {
-  return prompt("Pick one: rock, paper or scissors").toLowerCase();
+  //return prompt("Pick one: rock, paper or scissors").toLowerCase();
 };
 
 const oneRound = function () {
@@ -18,8 +18,9 @@ const oneRound = function () {
 
   try {
     if (choices.every((choice) => choice !== player))
-      throw new Error("Please input rock, paper or scissors only!");
-    if (player === computer) return `It's a draw`;
+      if (player === computer)
+        //throw new Error("Please input rock, paper or scissors only!");
+        return `It's a draw`;
     if (player === "paper" && computer !== "scissors") {
       playerScore++;
       return `You win! Paper beats rock!`;
