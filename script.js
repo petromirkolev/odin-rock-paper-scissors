@@ -20,17 +20,17 @@ const init = function () {
 const gameOver = function () {
   if (playerScore > computerScore) {
     popup.style.backgroundColor = "#feffbf";
-    popupHandler(`You win! Your score is ${playerScore}`);
+    popupHandler(`You won! Your final score is ${playerScore}`);
     return;
   }
   if (playerScore < computerScore) {
     popup.style.backgroundColor = "#f498c2";
-    popupHandler(`You lose! Your score is ${playerScore}`);
+    popupHandler(`You lost! Your final score is ${playerScore}`);
     return;
   }
   if (playerScore === computerScore) {
     popup.style.backgroundColor = "#feffbf";
-    popupHandler(`It's a draw!`);
+    popupHandler(`It's a tie!`);
     return;
   }
   init();
@@ -70,7 +70,7 @@ const oneRound = function (playerChoice, computerChoice) {
       throw new Error("Please input rock, paper or scissors only!");
 
     if (playerChoice === computerChoice) {
-      popupHandler("It's a draw");
+      popupHandler("It's a tie");
       return;
     }
     if (playerChoice === "paper" && computerChoice === "rock") {
