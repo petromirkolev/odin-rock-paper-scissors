@@ -17,19 +17,28 @@ const init = function () {
   playerScoreElement.textContent = playerScore = 0;
   computerScoreElement.textContent = computerScore = 0;
 };
-const checkForEndGame = function () {
-  if (rounds >= 5) {
-    playerScore > computerScore
-      ? `${popupHandler(`You win! Your score is ${playerScore}`)}`
-      : `${popupHandler(`You lose! Your score is ${playerScore}`)}`;
-    init();
+const gameOver = function () {
+  if (playerScore > computerScore) {
+    popup.style.backgroundColor = "#feffbf";
+    popupHandler(`You win! Your score is ${playerScore}`);
+    return;
   }
+  if (playerScore < computerScore) {
+    popup.style.backgroundColor = "#f498c2";
+    popupHandler(`You lose! Your score is ${playerScore}`);
+    return;
+  }
+  if (playerScore === computerScore) {
+    popup.style.backgroundColor = "#feffbf";
+    popupHandler(`It's a draw!`);
+    return;
+  }
+  init();
 };
 const updateScore = function () {
   roundsElement.textContent = rounds;
   playerScoreElement.textContent = playerScore;
   computerScoreElement.textContent = computerScore;
-  checkForEndGame();
 };
 const getComputerChoice = function () {
   return choices[Math.trunc(Math.random() * 3)];
@@ -40,6 +49,7 @@ const getPlayerChoice = function () {
 const popupHandler = function (message) {
   popup.style.visibility = "visible";
   popupMessage.textContent = message;
+
   setTimeout(() => {
     resetInputs();
     popup.style.visibility = "hidden";
@@ -51,7 +61,6 @@ const resetInputs = function () {
 
 // Game logic
 const oneRound = function (playerChoice, computerChoice) {
-  rounds++;
   roundsElement.textContent = rounds;
   computerPick.textContent = computerChoice;
   playerInput.value = playerChoice;
@@ -96,9 +105,14 @@ const oneRound = function (playerChoice, computerChoice) {
 };
 // Button event listener to start the game
 document.querySelector("button").addEventListener("click", function () {
-  const computerChoice = getComputerChoice();
-  const playerChoice = getPlayerChoice();
-  oneRound(playerChoice, computerChoice);
+  rounds++;
+  if (rounds < 5) {
+    const computerChoice = getComputerChoice();
+    const playerChoice = getPlayerChoice();
+    oneRound(playerChoice, computerChoice);
+  } else {
+    gameOver();
+  }
 });
 
 // Clean UI on reload
