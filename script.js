@@ -4,9 +4,33 @@ let playerInput = document.querySelector("input");
 let computerPick = document.querySelector(".computer > h2");
 let popup = document.querySelector(".popup");
 let popupMessage = document.querySelector(".popup > p");
+let roundsElement = document.querySelector(".rounds");
+let playerScoreElement = document.querySelector(".player > p");
+let computerScoreElement = document.querySelector(".computer > p");
 let computerScore = 0;
 let playerScore = 0;
 let rounds = 0;
+
+const init = function () {
+  roundsElement.textContent = rounds = 0;
+  playerScoreElement.textContent = playerScore = 0;
+  computerScoreElement.textContent = computerScore = 0;
+};
+
+const checkForEndGame = function () {
+  if (rounds >= 5) {
+    playerScore > computerScore
+      ? `${popupHandler(`You win! Your score is ${playerScore}`)}`
+      : `${popupHandler(`You lose! Your score is ${playerScore}`)}`;
+    init();
+  }
+};
+const updateScore = function () {
+  roundsElement.textContent = rounds;
+  playerScoreElement.textContent = playerScore;
+  computerScoreElement.textContent = computerScore;
+  checkForEndGame();
+};
 
 const getComputerChoice = function () {
   return choices[Math.trunc(Math.random() * 3)];
@@ -31,23 +55,27 @@ const resetInputs = function () {
 
 const oneRound = function (playerChoice, computerChoice) {
   rounds++;
+  roundsElement.textContent = rounds;
 
   try {
     if (choices.every((choice) => choice !== playerChoice))
       throw new Error("Please input rock, paper or scissors only!");
 
+    computerPick.textContent = computerChoice;
+    playerInput.value = playerChoice;
+
     if (playerChoice === computerChoice) {
       popupHandler("It's a draw");
     }
-    if (playerChoice === "paper" && computerChoice !== "scissors") {
+    if (playerChoice === "paper" && computerChoice === "rock") {
       playerScore++;
       popupHandler("You win! Paper beats rock!");
     }
-    if (playerChoice === "rock" && computerChoice !== "paper") {
+    if (playerChoice === "rock" && computerChoice === "scissors") {
       playerScore++;
       popupHandler(`You win! Rock beats scissors!`);
     }
-    if (playerChoice === "scissors" && computerChoice !== "rock") {
+    if (playerChoice === "scissors" && computerChoice === "paper") {
       playerScore++;
       popupHandler(`You win! Scissors beats paper!`);
     }
@@ -57,15 +85,18 @@ const oneRound = function (playerChoice, computerChoice) {
         computerChoice[0].toUpperCase() + computerChoice.slice(1)
       } beats ${playerChoice}!`
     );
+    updateScore();
     return;
   } catch (error) {
     alert(error);
   }
 };
 
+init();
+
 const play = function () {};
 document.querySelector("button").addEventListener("click", function () {
-  const computerChoice = (computerPick.textContent = getComputerChoice());
-  const playerChoice = (playerInput.value = getPlayerChoice());
+  const computerChoice = getComputerChoice();
+  const playerChoice = getPlayerChoice();
   oneRound(playerChoice, computerChoice);
 });
