@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/script.js"></script>
     <link rel="stylesheet" href="/style.css" />
     <title>Rock Paper Scissors</title>
   </head>
@@ -12,14 +11,14 @@
     <div class="header font-style">
       <h1>Rock Paper Scissors</h1>
     </div>
-    <div class="popup">
-      <p>Testing</p>
+    <div class="popup" style="visibility: hidden">
+      <p></p>
     </div>
     <div class="playing-field">
       <div class="current-picks">
         <div class="player">
           <h1 class="font-style">Player</h1>
-          <h2></h2>
+          <input type="text" autofocus />
         </div>
         <div class="computer">
           <h1 class="font-style">Computer</h1>
@@ -27,9 +26,10 @@
         </div>
       </div>
       <div class="submit-pick">
-        <button>Fight!</button>
+        <button class="btn-submit">Fight!</button>
       </div>
     </div>
     <footer>Copyright© Petromir Kolev 2022</footer>
+    <script src="/script.js"></script>
   </body>
 </html>
