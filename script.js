@@ -1,3 +1,4 @@
+"use strict";
 const choices = ["rock", "paper", "scissors"];
 const btn = document.querySelector("button");
 let playerInput = document.querySelector("input");
