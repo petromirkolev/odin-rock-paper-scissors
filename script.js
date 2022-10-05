@@ -21,17 +21,14 @@ const gameOver = function () {
   if (playerScore > computerScore) {
     popup.style.backgroundColor = "#feffbf";
     popupHandler(`You won! Your final score is ${playerScore}`);
-    return;
   }
   if (playerScore < computerScore) {
     popup.style.backgroundColor = "#f498c2";
     popupHandler(`You lost! Your final score is ${playerScore}`);
-    return;
   }
   if (playerScore === computerScore) {
     popup.style.backgroundColor = "#feffbf";
     popupHandler(`It's a tie!`);
-    return;
   }
   init();
 };
@@ -114,6 +111,5 @@ document.querySelector("button").addEventListener("click", function () {
     gameOver();
   }
 });
-
-// Clean UI on reload
+// Clean UI on page load and reload
 init();
