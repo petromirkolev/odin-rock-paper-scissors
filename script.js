@@ -1,4 +1,5 @@
 "use strict";
+// Variables
 const choices = ["rock", "paper", "scissors"];
 const btn = document.querySelector("button");
 let playerInput = document.querySelector("input");
@@ -13,11 +14,13 @@ let playerScore = 0;
 let rounds = 0;
 
 // Helpers
+// Initialize UI
 const init = function () {
   roundsElement.textContent = rounds = 0;
   playerScoreElement.textContent = playerScore = 0;
   computerScoreElement.textContent = computerScore = 0;
 };
+// Game over handler
 const gameOver = function () {
   if (playerScore > computerScore) {
     popup.style.backgroundColor = "#feffbf";
@@ -33,17 +36,21 @@ const gameOver = function () {
   }
   init();
 };
+// Update score handler
 const updateScore = function () {
   roundsElement.textContent = rounds;
   playerScoreElement.textContent = playerScore;
   computerScoreElement.textContent = computerScore;
 };
+// Get the random computer choice
 const getComputerChoice = function () {
   return choices[Math.trunc(Math.random() * 3)];
 };
+// Get player input from UI
 const getPlayerChoice = function () {
   return playerInput.value.toLowerCase();
 };
+// Create popup window after each round or game end
 const popupHandler = function (message) {
   popup.style.visibility = "visible";
   popupMessage.textContent = message;
@@ -53,11 +60,11 @@ const popupHandler = function (message) {
     popup.style.visibility = "hidden";
   }, 3000);
 };
+// Reset input fields after each round
 const resetInputs = function () {
   playerInput.value = computerPick.textContent = "";
 };
-
-// Game logic
+// Playing one round logic
 const oneRound = function (playerChoice, computerChoice) {
   roundsElement.textContent = rounds;
   computerPick.textContent = computerChoice;
@@ -101,8 +108,8 @@ const oneRound = function (playerChoice, computerChoice) {
     alert(error);
   }
 };
-// Button event listener to start the game
-document.querySelector("button").addEventListener("click", function () {
+// Playing all rounds logic
+const play = function () {
   rounds++;
   if (rounds < 5) {
     const computerChoice = getComputerChoice();
@@ -111,6 +118,11 @@ document.querySelector("button").addEventListener("click", function () {
   } else {
     gameOver();
   }
+};
+// Event listeners
+document.querySelector("button").addEventListener("click", play);
+playerInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") play();
 });
 // Clean UI on page load and reload
 init();
