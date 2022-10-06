@@ -13,6 +13,9 @@ let computerScore = 0;
 let playerScore = 0;
 let rounds = 0;
 
+// Branch testing
+console.log("This is a branch");
+
 // Helpers
 // Initialize UI
 const init = function () {
