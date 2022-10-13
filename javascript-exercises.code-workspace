@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "../javascript-exercises"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "TOP_Project_RockPaperScissors"
+  }
+}
